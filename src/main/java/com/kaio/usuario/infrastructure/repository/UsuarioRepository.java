@@ -1,7 +1,8 @@
 package com.kaio.usuario.infrastructure.repository;
 
 
-import com.kaio.aprendendospring.infrastructure.entity.Usuario;
+
+import com.kaio.usuario.infrastructure.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
