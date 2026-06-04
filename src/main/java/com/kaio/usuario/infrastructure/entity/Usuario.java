@@ -26,7 +26,7 @@ public class Usuario implements UserDetails {
     @Column(name = "nome")
     private String nome;
     @Column(name = "cpf")
-    private Long cpf;
+    private String cpf;
     @Column(name = "email")
     private String email;
     @Column(name = "senha")
