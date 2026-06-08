@@ -96,4 +96,21 @@ public class UsuarioConverter {
                 .build();
 
     }
+    public Usuario updateUsuario(UsuarioDTO usuarioDTO, Usuario entity){
+        return Usuario.builder()
+                //  pesquisa o nome,  nome é diferente de null se for pega o nome senão continua usando o da entity
+                .nome(usuarioDTO.getNome() != null ? usuarioDTO.getNome() : entity.getNome())
+                // aqui ele já pega direto e sem alteração
+                .id(entity.getId())
+                .cpf(usuarioDTO.getCpf() != null ? usuarioDTO.getCpf() : entity.getCpf())
+                // pesquisa a email, email é diferente de null se for pega o email senão continua usando o da entity
+                .email(usuarioDTO.getEmail() != null ? usuarioDTO.getEmail() : entity.getEmail())
+                // pesquisa a senha  se for diferente de null pega a senha senão continua usando o da entity
+                .senha((usuarioDTO.getSenha() != null ? usuarioDTO.getSenha() : entity.getSenha()))
+                .enderecos(entity.getEnderecos())
+                .telefones(entity.getTelefones())
+                .build();
+    }
+
+
 }
