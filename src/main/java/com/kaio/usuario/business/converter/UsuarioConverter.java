@@ -60,6 +60,7 @@ public class UsuarioConverter {
     public UsuarioDTO paraUsuarioDTO(Usuario usuarioDTO) {
         return UsuarioDTO.builder()
                 .nome(usuarioDTO.getNome())
+                .cpf(usuarioDTO.getCpf())
                 .email(usuarioDTO.getEmail())
                 .senha(usuarioDTO.getSenha())
                 .enderecos(paraListaEnderecoDTO(usuarioDTO.getEnderecos()))
@@ -73,13 +74,13 @@ public class UsuarioConverter {
         return enderecoDTO.stream().map(this::paraEnderecoDTO).toList();
     }
 
-    public EnderecoDTO paraEnderecoDTO(Endereco enderecoDTO) {
+    public EnderecoDTO paraEnderecoDTO(Endereco endereco) {
         return EnderecoDTO.builder()
-                .cep(enderecoDTO.getCep())
-                .rua(enderecoDTO.getRua())
-                .numero(enderecoDTO.getNumero())
-                .bairro(enderecoDTO.getBairro())
-
+                .id(endereco.getId())
+                .cep(endereco.getCep())
+                .rua(endereco.getRua())
+                .numero(endereco.getNumero())
+                .bairro(endereco.getBairro())
                 .build();
     }
 
@@ -87,12 +88,47 @@ public class UsuarioConverter {
         return telefoneDTO.stream().map(this::paraTelefoneDTO).toList();
     }
 
-    public TelefoneDTO paraTelefoneDTO(Telefone telefoneDTO) {
+    public TelefoneDTO paraTelefoneDTO(Telefone telefone) {
         return TelefoneDTO.builder()
-                .ddd(telefoneDTO.getDdd())
-                .telefone(telefoneDTO.getTelefone())
+                .id(telefone.getId())
+                .ddd(telefone.getDdd())
+                .telefone(telefone.getTelefone())
+                .build();
+    }
+
+    public Usuario updateUsuario(UsuarioDTO usuarioDTO, Usuario entity){
+        return Usuario.builder()
+//  pesquisa o nome,  nome é diferente de null se for pega o nome senão continua usando o da entity
+                .nome(usuarioDTO.getNome() != null ? usuarioDTO.getNome() : entity.getNome())
+// aqui ele já pega direto e sem alteração
+                .id(entity.getId())
+                .cpf(usuarioDTO.getCpf() != null ? usuarioDTO.getCpf() : entity.getCpf())
+// pesquisa a email, email é diferente de null se for pega o email senão continua usando o da entity
+                .email(usuarioDTO.getEmail() != null ? usuarioDTO.getEmail() : entity.getEmail())
+// pesquisa a senha  se for diferente de null pega a senha senão continua usando o da entity
+                .senha((usuarioDTO.getSenha() != null ? usuarioDTO.getSenha() : entity.getSenha()))
+                .enderecos(entity.getEnderecos())
+                .telefones(entity.getTelefones())
+                .build();
+    }
+
+    public Endereco updateEndereco(EnderecoDTO enderecoDTO, Endereco enderecoEntity){
+        return Endereco.builder()
+                .id(enderecoEntity.getId())
+                .cep(enderecoDTO.getCep()!= null ? enderecoDTO.getCep() : enderecoEntity.getCep())
+                .rua(enderecoDTO.getRua() != null ? enderecoDTO.getRua() : enderecoEntity.getRua())
+                .numero(enderecoDTO.getNumero() != null ? enderecoDTO.getNumero() : enderecoEntity.getNumero())
+                .bairro(enderecoDTO.getBairro() != null ? enderecoDTO.getBairro() : enderecoEntity.getBairro())
 
                 .build();
-
     }
+
+    public Telefone updateTelefone(TelefoneDTO telefoneDTO, Telefone telefoneEntity){
+        return Telefone.builder()
+                .id(telefoneEntity.getId())
+                .ddd(telefoneDTO.getDdd() != null ? telefoneDTO.getDdd() : telefoneEntity.getDdd())
+                .telefone(telefoneDTO.getTelefone() != null ? telefoneDTO.getTelefone() : telefoneEntity.getTelefone())
+                .build();
+    }
+
 }
