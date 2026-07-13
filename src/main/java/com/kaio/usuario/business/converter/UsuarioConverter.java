@@ -131,4 +131,22 @@ public class UsuarioConverter {
                 .build();
     }
 
+    public Endereco paraEnderecoEntity(EnderecoDTO dto, Long idUsuario){
+        return Endereco.builder()
+                .rua(dto.getRua())
+                .numero(dto.getNumero())
+                .cep(dto.getCep())
+                .bairro(dto.getBairro())
+                .usuario_id(idUsuario)
+                .build();
+    }
+
+    public Telefone paraTelefoneEntity(TelefoneDTO tDto, Long idUsuario){
+        return Telefone.builder()
+                .telefone(tDto.getTelefone())
+                .ddd(tDto.getDdd())
+                .usuario_id(idUsuario)
+                .build();
+    }
+
 }
