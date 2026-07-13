@@ -69,4 +69,16 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.autualizaTelefone(id, telefoneDTO));
     }
 
+    @PostMapping("/endereco")
+    public ResponseEntity<EnderecoDTO>cadastraEndereco(@RequestBody EnderecoDTO enderecoDTO,
+                                                       @RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(usuarioService.cadastraEndereco(token, enderecoDTO));
+    }
+
+    @PostMapping("/telefone")
+    public ResponseEntity<TelefoneDTO>cadastraTelefone(@RequestBody TelefoneDTO telefoneDTO,
+                                                       @RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(usuarioService.cadastraTelefone(token, telefoneDTO));
+    }
+
 }

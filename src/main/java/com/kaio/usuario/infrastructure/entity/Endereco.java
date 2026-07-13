@@ -24,4 +24,6 @@ public class Endereco {
     private String numero;
     @Column(name = "bairro")
     private String bairro;
+    @Column(name = "usuario_id")
+    private Long usuario_id;
 }
